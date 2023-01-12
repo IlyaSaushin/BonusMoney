@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_recycler_item_background"
+    android:layout_marginHorizontal="@dimen/margin1"
+    android:layout_marginTop="@dimen/margin1">
+
+    <TextView
+        android:id="@+id/bonus_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bonus_money"
+        android:textSize="@dimen/text1"
+        android:textColor="@color/cardBackgroundColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/logo"
+        android:layout_marginStart="@dimen/margin1"
+        />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="@dimen/logoSize"
+        android:layout_height="@dimen/logoSize"
+        android:src="@drawable/card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/margin1"
+        android:layout_marginEnd="@dimen/margin1"
+        />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/darkGrey"
+        app:layout_constraintTop_toBottomOf="@id/logo"
+        android:layout_marginTop="@dimen/margin2"
+        android:layout_marginHorizontal="@dimen/margin1"
+        />
+    
+    <TextView
+        android:id="@+id/score_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ex_score"
+        android:textSize="@dimen/text0"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/cardBackgroundColor"
+        android:layout_marginStart="@dimen/margin1"
+        android:layout_marginTop="@dimen/margin1"
+        />
+
+    <TextView
+        android:id="@+id/score_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score_text"
+        android:textColor="@color/highlightTextColor"
+        app:layout_constraintBottom_toBottomOf="@id/score_count"
+        app:layout_constraintStart_toEndOf="@id/score_count"
+        android:layout_marginStart="@dimen/margin2"
+        />
+
+    <TextView
+        android:id="@+id/cashback_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cashback_header"
+        android:textSize="@dimen/text3"
+        android:textColor="@color/highlightTextColor"
+        app:layout_constraintTop_toBottomOf="@id/score_count"
+        app:layout_constraintStart_toStartOf="@id/score_count"
+        android:layout_marginTop="@dimen/margin1"
+        />
+
+    <TextView
+        android:id="@+id/cashback_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cashback_percent_example"
+        android:textColor="@color/cardBackgroundColor"
+        android:textSize="@dimen/text3"
+        app:layout_constraintTop_toBottomOf="@id/cashback_header"
+        app:layout_constraintStart_toStartOf="@id/cashback_header"
+        />
+    
+    <TextView
+        android:id="@+id/level_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/level_header"
+        android:textSize="@dimen/text3"
+        android:textColor="@color/highlightTextColor"
+        app:layout_constraintTop_toTopOf="@id/cashback_header"
+        app:layout_constraintStart_toEndOf="@id/cashback_header"
+        android:layout_marginStart="@dimen/margin3"
+        />
+
+    <TextView
+        android:id="@+id/level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/base_level_text"
+        android:textSize="@dimen/text3"
+        android:textColor="@color/cardBackgroundColor"
+        app:layout_constraintTop_toBottomOf="@id/level_header"
+        app:layout_constraintStart_toStartOf="@id/level_header"
+        android:layout_marginTop="@dimen/margin2"
+        />
+
+    <View
+        android:id="@+id/view_second"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/darkGrey"
+        app:layout_constraintTop_toBottomOf="@id/level"
+        android:layout_marginTop="@dimen/margin2"
+        android:layout_marginHorizontal="@dimen/margin1"
+        />
+
+    <ImageView
+        android:id="@+id/icon_eye"
+        android:layout_width="@dimen/iconSize"
+        android:layout_height="@dimen/iconSize"
+        android:src="@drawable/icon_eye"
+        app:layout_constraintTop_toBottomOf="@id/view_second"
+        app:layout_constraintEnd_toStartOf="@id/icon_trash"
+        android:layout_marginTop="@dimen/margin1"
+        android:layout_marginEnd="@dimen/margin3"
+        />
+
+    <ImageView
+        android:id="@+id/icon_trash"
+        android:layout_width="@dimen/iconSize"
+        android:layout_height="@dimen/iconSize"
+        android:src="@drawable/icon_trashbox"
+        app:layout_constraintTop_toBottomOf="@id/view_second"
+        app:layout_constraintEnd_toStartOf="@id/details_btn"
+        android:layout_marginTop="@dimen/margin1"
+        android:layout_marginEnd="@dimen/margin3"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/details_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/more"
+        android:textSize="@dimen/text3"
+        android:textAllCaps="false"
+        android:textColor="@color/textColor"
+        android:background="@drawable/details_btn_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_second"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="@dimen/margin1"
+        android:layout_marginTop="@dimen/margin2"
+        android:layout_marginBottom="@dimen/margin1"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

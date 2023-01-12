@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text0">20sp</dimen>
+    <dimen name="text1">16sp</dimen>
+    <dimen name="text2">12sp</dimen>
+    <dimen name="text3">10sp</dimen>
+    <dimen name="text4">8sp</dimen>
+    <dimen name="margin1">12dp</dimen>
+    <dimen name="margin2">6dp</dimen>
+    <dimen name="margin3">34dp</dimen>
+    <dimen name="logoSize">32dp</dimen>
+    <dimen name="iconSize">12dp</dimen>
+    <dimen name="sizePreloader">32dp</dimen>
+    <color name="cardBackgroundColor">@color/custom_black</color>
+    <color name="highlightTextColor">@color/darkGrey</color>
+    <color name="textColor">@color/blue</color>
+    <color name="mainColor">@color/red</color>
+    <color name="accentColor">@color/lightGrey</color>
+    <color name="backgroundColor">@color/lightGrey</color>
+    <style name="CircularProgressBar" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/custom_black</item>
+    </style>
+</resources>
