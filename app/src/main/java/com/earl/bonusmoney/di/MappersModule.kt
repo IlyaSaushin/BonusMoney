@@ -40,6 +40,12 @@ object MappersModule {
 
     @Singleton
     @Provides
+    fun provideMobileAppDashboardRemoteToDataMapper() : MobileAppDashboardRemoteToDataMapper<MobileAppDashboardData> {
+        return BaseMobileAppDashboardRemoteToDataMapper()
+    }
+
+    @Singleton
+    @Provides
     fun provideCompanyRemoteToDataMapper(
         companyIdMapper: CompanyIdRemoteToDataMapper<CompanyIdData>,
         customerMarkParametersRemoteToDataMapper: CustomerMarkParametersRemoteToDataMapper<CustomerMarkParametersData>,
@@ -133,6 +139,26 @@ object MappersModule {
             companyIdMapper,
             customerMapper,
             mobileAppMapper
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideCardListDataToDomainMapper(
+        mapper: CompanyDataToDomainMapper<CompanyDomain>
+    ) : CardListDataToDomainMapper<CardListDomain> {
+        return BaseCardListDataToDomainMapper(
+            mapper
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideCardListDomainToPresentationMapper(
+        mapper: CompanyDomainToPresentationMapper<CompanyPresentation>
+    ) : CardListDomainToPresentationMapper<CardListPresentation> {
+        return BaseCardListDomainToPresentationMapper(
+            mapper
         )
     }
 }

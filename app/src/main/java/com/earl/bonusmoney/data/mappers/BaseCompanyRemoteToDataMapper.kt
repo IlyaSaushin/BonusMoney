@@ -4,9 +4,9 @@ import com.earl.bonusmoney.data.models.CompanyData
 import com.earl.bonusmoney.data.models.CompanyIdData
 import com.earl.bonusmoney.data.models.CustomerMarkParametersData
 import com.earl.bonusmoney.data.models.MobileAppDashboardData
-import com.earl.bonusmoney.data.models.remote.CompanyIdRemote
-import com.earl.bonusmoney.data.models.remote.CustomerMarkParametersRemote
-import com.earl.bonusmoney.data.models.remote.MobileAppDashboardRemote
+import com.earl.bonusmoney.data.models.remote.CompanyId
+import com.earl.bonusmoney.data.models.remote.CustomerMarkParameters
+import com.earl.bonusmoney.data.models.remote.MobileAppDashboard
 import javax.inject.Inject
 
 class BaseCompanyRemoteToDataMapper @Inject constructor(
@@ -16,12 +16,12 @@ class BaseCompanyRemoteToDataMapper @Inject constructor(
 ) : CompanyRemoteToDataMapper<CompanyData> {
 
     override fun map(
-        company: CompanyIdRemote,
-        customerMarkParametersRemote: CustomerMarkParametersRemote,
-        mobileAppDashboardRemote: MobileAppDashboardRemote
+        company: CompanyId,
+        customerMarkParameters: CustomerMarkParameters,
+        mobileAppDashboardRemote: MobileAppDashboard
     ) = CompanyData.Base(
         company.mapToData(companyIdMapper),
-        customerMarkParametersRemote.mapToData(customerMarkParametersRemoteToDataMapper),
+        customerMarkParameters.mapToData(customerMarkParametersRemoteToDataMapper),
         mobileAppDashboardRemote.mapToData(mobileAppDashboardRemoteToDataMapper)
     )
 }

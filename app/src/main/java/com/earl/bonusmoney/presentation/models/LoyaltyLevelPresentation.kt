@@ -2,6 +2,8 @@ package com.earl.bonusmoney.presentation.models
 
 interface LoyaltyLevelPresentation {
 
+    fun provideDetailsForCardRecycler() : LoyaltyLevelDetailsForRecyclerDetails
+
     class Base(
         private val number: Int,
         private val name: String,
@@ -9,6 +11,7 @@ interface LoyaltyLevelPresentation {
         private val markToCash: Int,
         private val cashToMark: Int
     ) : LoyaltyLevelPresentation {
-
+        override fun provideDetailsForCardRecycler() =
+            LoyaltyLevelDetailsForRecyclerDetails(number, name)
     }
 }

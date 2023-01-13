@@ -1,11 +1,11 @@
 package com.earl.bonusmoney.data.mappers
 
-import com.earl.bonusmoney.data.models.remote.LoyaltyLevelRemote
+import com.earl.bonusmoney.data.models.remote.LoyaltyLevel
 
 interface CustomerMarkParametersRemoteToDataMapper<T> {
 
     fun map(
-        loyaltyLevel: LoyaltyLevelRemote,
+        loyaltyLevel: LoyaltyLevel,
         mark: Int
     ) : T
 }

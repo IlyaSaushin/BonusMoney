@@ -12,4 +12,5 @@
     <string name="more">Подробнее</string>
     <string name="card_management">Управление картами</string>
     <string name="loading_companies">Подгрузка компаний</string>
+    <string name="okay">окей</string>
 </resources>

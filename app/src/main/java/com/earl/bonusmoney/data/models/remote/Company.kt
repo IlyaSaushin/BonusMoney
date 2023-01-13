@@ -4,25 +4,25 @@ import com.earl.bonusmoney.data.mappers.*
 import com.earl.bonusmoney.data.models.*
 
 @kotlinx.serialization.Serializable
-data class CompanyRemote(
-    val company: CompanyIdRemote,
-    val customerMarkParametersRemote: CustomerMarkParametersRemote,
-    val mobileAppDashboardRemote: MobileAppDashboardRemote
+data class Company(
+    val company: CompanyId,
+    val customerMarkParameters: CustomerMarkParameters,
+    val mobileAppDashboard: MobileAppDashboard
 ) {
     fun mapToData(mapper: CompanyRemoteToDataMapper<CompanyData>) =
-        mapper.map(company, customerMarkParametersRemote, mobileAppDashboardRemote)
+        mapper.map(company, customerMarkParameters, mobileAppDashboard)
 }
 
 @kotlinx.serialization.Serializable
-data class CompanyIdRemote(
+data class CompanyId(
     val companyId: String
 ) {
     fun mapToData(mapper: CompanyIdRemoteToDataMapper<CompanyIdData>) = mapper.map(companyId)
 }
 
 @kotlinx.serialization.Serializable
-data class CustomerMarkParametersRemote(
-    val loyaltyLevel: LoyaltyLevelRemote,
+data class CustomerMarkParameters(
+    val loyaltyLevel: LoyaltyLevel,
     val mark: Int
 ) {
     fun mapToData(mapper: CustomerMarkParametersRemoteToDataMapper<CustomerMarkParametersData>) =
@@ -30,7 +30,7 @@ data class CustomerMarkParametersRemote(
 }
 
 @kotlinx.serialization.Serializable
-data class LoyaltyLevelRemote(
+data class LoyaltyLevel(
     val number: Int,
     val name: String,
     val requiredSum: Int,
@@ -42,7 +42,7 @@ data class LoyaltyLevelRemote(
 }
 
 @kotlinx.serialization.Serializable
-data class MobileAppDashboardRemote(
+data class MobileAppDashboard(
     val companyName: String,
     val logo: String,
     val backgroundColor: String,

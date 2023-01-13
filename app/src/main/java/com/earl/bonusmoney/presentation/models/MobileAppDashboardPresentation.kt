@@ -2,6 +2,8 @@ package com.earl.bonusmoney.presentation.models
 
 interface MobileAppDashboardPresentation {
 
+    fun provideDetailsForCardRecycler() : MobileAppDashboardDetailsForCardRecycler
+
     class Base(
         private val companyName: String,
         private val logo: String,
@@ -13,5 +15,15 @@ interface MobileAppDashboardPresentation {
         private val accentColor: String
     ) : MobileAppDashboardPresentation {
 
+        override fun provideDetailsForCardRecycler() =
+            MobileAppDashboardDetailsForCardRecycler(
+                companyName,
+                logo,
+                mainColor,
+                cardBackgroundColor,
+                textColor,
+                highlightTextColor,
+                accentColor
+            )
     }
 }

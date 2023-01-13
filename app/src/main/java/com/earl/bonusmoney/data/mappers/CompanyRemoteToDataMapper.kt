@@ -1,14 +1,14 @@
 package com.earl.bonusmoney.data.mappers
 
-import com.earl.bonusmoney.data.models.remote.CompanyIdRemote
-import com.earl.bonusmoney.data.models.remote.CustomerMarkParametersRemote
-import com.earl.bonusmoney.data.models.remote.MobileAppDashboardRemote
+import com.earl.bonusmoney.data.models.remote.CompanyId
+import com.earl.bonusmoney.data.models.remote.CustomerMarkParameters
+import com.earl.bonusmoney.data.models.remote.MobileAppDashboard
 
 interface CompanyRemoteToDataMapper<T> {
 
     fun map(
-        company: CompanyIdRemote,
-        customerMarkParametersRemote: CustomerMarkParametersRemote,
-        mobileAppDashboardRemote: MobileAppDashboardRemote
+        company: CompanyId,
+        customerMarkParameters: CustomerMarkParameters,
+        mobileAppDashboardRemote: MobileAppDashboard
     ) : T
 }
