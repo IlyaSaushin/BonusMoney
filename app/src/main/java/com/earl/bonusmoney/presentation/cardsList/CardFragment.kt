@@ -1,4 +1,4 @@
-package com.earl.bonusmoney.presentation
+package com.earl.bonusmoney.presentation.cardsList
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -7,20 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.earl.bonusmoney.R
 import com.earl.bonusmoney.databinding.FragmentCardManagerBinding
+import com.earl.bonusmoney.presentation.base.BaseFragment
+import com.earl.bonusmoney.presentation.base.Keys
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class CardFragment : BaseFragment<FragmentCardManagerBinding>(), CardLoadingResultListenerCallback {
+class CardFragment : BaseFragment<FragmentCardManagerBinding>(), CardLoadingResultListenerCallback, OnCardCompanyClickListener {
 
-    private lateinit var viewModel: CardFragmentViewModel
+    private val viewModel : CardFragmentViewModel by viewModels()
     private var isLoading: Boolean = false
     private var cardsCount = EMPTY_LIST
     private lateinit var paginationLoadingDecoration: PaginationLoadingDecoration
@@ -32,14 +35,13 @@ class CardFragment : BaseFragment<FragmentCardManagerBinding>(), CardLoadingResu
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[CardFragmentViewModel::class.java]
         initProgressBar()
         initRecyclerAdapter()
         getAllCards(START_OFFSET_VALUE)
     }
 
     private fun initRecyclerAdapter() {
-        val adapter = CardRecyclerAdapter()
+        val adapter = CardRecyclerAdapter(this)
         val recycler = binding.cardRecycler
         recycler.adapter = adapter
         paginationLoadingDecoration = PaginationLoadingDecoration()
@@ -49,9 +51,7 @@ class CardFragment : BaseFragment<FragmentCardManagerBinding>(), CardLoadingResu
         lifecycleScope.launchWhenStarted {
             viewModel.provideCardsFlow()
                 .onEach { cards ->
-                    if (cards.isNotEmpty()) {
-                        binding.progressLayout.isVisible = false
-                    }
+                    if (cards.isNotEmpty()) binding.progressLayout.isVisible = false
                     adapter.submitList(cards)
                 }
                 .collect()
@@ -70,10 +70,8 @@ class CardFragment : BaseFragment<FragmentCardManagerBinding>(), CardLoadingResu
                 if (!isLoading) {
                     if (visibleItemCount + firstVisibleItems >= totalItemsCount && totalItemsCount != cardsCount) {
                         isLoading = true
-                        Log.d("tag", "onScrolled: load")
                         getAllCards(totalItemsCount)
                         cardsCount = totalItemsCount
-                        Log.d("tag", "onScrolled: totals item count -> $totalItemsCount")
                         isLoading = false
                     }
                 }
@@ -83,18 +81,29 @@ class CardFragment : BaseFragment<FragmentCardManagerBinding>(), CardLoadingResu
     }
 
     private fun getAllCards(offset: Int) {
-        viewModel.getAllCards(offset)
+        val key = preferenceManager.getString(Keys.KEY_API) ?: ""
+        val value = preferenceManager.getString(Keys.KEY_API_VALUE) ?: ""
+        val apikey = mapOf(Pair(key, value))
+        viewModel.getAllCards(offset, apikey)
     }
 
     private fun initProgressBar() {
-        binding.progressLayout.isVisible = cardsCount == 0
+        binding.progressLayout.isVisible = cardsCount == EMPTY_LIST
     }
 
     override fun notifyUserAboutError(errorMessage: String) {
         binding.progressLayout.isVisible = false
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Ошибочка вышла...")
+        builder.setTitle(requireContext().resources.getString(R.string.error))
         builder.setMessage(errorMessage)
+        builder.setPositiveButton(R.string.okay) { dialog, which -> }
+        builder.show()
+    }
+
+    override fun onCardClicked(companyId: String, btnDetails: String) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.card_alert_title, String.format("%s", companyId)))
+        builder.setMessage(getString(R.string.card_alert_message, String.format("%s", btnDetails)))
         builder.setPositiveButton(R.string.okay) { dialog, which -> }
         builder.show()
     }

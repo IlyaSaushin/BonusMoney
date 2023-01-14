@@ -13,4 +13,10 @@
     <string name="card_management">Управление картами</string>
     <string name="loading_companies">Подгрузка компаний</string>
     <string name="okay">окей</string>
+    <string name="error">Ошибка</string>
+    <string name="card_alert_title">Вы нажали кнопку: %s</string>
+    <string name="card_alert_message">Id компании -> %s</string>
+    <string name="card_trash_btn">Корзина</string>
+    <string name="card_eye_btn">Глаз</string>
+    <string name="card_details_btn">Подробнее</string>
 </resources>

@@ -13,6 +13,7 @@ interface CompanyPresentation {
             val customerMarkParametersDetails = customerMarkParameters.provideDetailsForCardRecycler()
             val mobileAppDashboardDetails = mobileAppDashboard.provideDetailsForCardRecycler()
             return CardRecyclerDetails(
+                company.id,
                 mobileAppDashboardDetails.name,
                 mobileAppDashboardDetails.image,
                 customerMarkParametersDetails.cashbackPercent,
@@ -21,7 +22,8 @@ interface CompanyPresentation {
                 mobileAppDashboardDetails.cardBackground,
                 mobileAppDashboardDetails.text,
                 mobileAppDashboardDetails.highlight,
-                mobileAppDashboardDetails.accent
+                mobileAppDashboardDetails.accent,
+                mobileAppDashboardDetails.backgroundColor
             )
         }
     }

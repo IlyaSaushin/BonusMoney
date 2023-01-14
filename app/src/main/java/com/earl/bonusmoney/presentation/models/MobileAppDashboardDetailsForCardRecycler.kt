@@ -7,5 +7,6 @@ data class MobileAppDashboardDetailsForCardRecycler(
     val cardBackground: String,
     val text: String,
     val highlight: String,
-    val accent: String
+    val accent: String,
+    val backgroundColor: String
 )

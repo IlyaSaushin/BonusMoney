@@ -23,7 +23,8 @@ interface MobileAppDashboardPresentation {
                 cardBackgroundColor,
                 textColor,
                 highlightTextColor,
-                accentColor
+                accentColor,
+                backgroundColor
             )
     }
 }

@@ -1,15 +1,21 @@
-package com.earl.bonusmoney.presentation
+package com.earl.bonusmoney.presentation.cardsList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.earl.bonusmoney.R
 import com.earl.bonusmoney.databinding.CardRecyclerItemBinding
 import com.earl.bonusmoney.presentation.models.CardRecyclerDetails
 
-class CardRecyclerAdapter : ListAdapter<CardRecyclerDetails, CardRecyclerAdapter.ItemViewHolder>(Diff) {
+interface OnCardCompanyClickListener {
+    fun onCardClicked(companyId: String, btnDetails: String)
+}
+
+class CardRecyclerAdapter(
+    private val clickListener: OnCardCompanyClickListener
+) : ListAdapter<CardRecyclerDetails, CardRecyclerAdapter.ItemViewHolder>(Diff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val bidning = CardRecyclerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,11 +30,27 @@ class CardRecyclerAdapter : ListAdapter<CardRecyclerDetails, CardRecyclerAdapter
     inner class ItemViewHolder(private val binding: CardRecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CardRecyclerDetails) {
             val context = binding.bonusMoney.context
-            Glide.with(context).load(item.image).into(binding.logo)
-            binding.bonusMoney.text = item.name
-            binding.cashbackPercent.text = item.cashbackPercent.toString()
-            binding.level.text = item.loyaltyLevel
-            // todo color!!!
+            item.provideRecyclerDetails(
+                binding.bonusMoney,
+                binding.logo,
+                binding.cashbackPercent,
+                binding.level,
+                binding.scoreCount,
+                binding.scoreText,
+                binding.iconEye,
+                binding.detailsBtn,
+                binding.iconTrash,
+                binding.layout
+            )
+            binding.detailsBtn.setOnClickListener {
+                clickListener.onCardClicked(context.resources.getString(R.string.card_details_btn), item.provideId())
+            }
+            binding.iconEye.setOnClickListener {
+                clickListener.onCardClicked(context.resources.getString(R.string.card_eye_btn), item.provideId())
+            }
+            binding.iconTrash.setOnClickListener {
+                clickListener.onCardClicked(context.resources.getString(R.string.card_trash_btn), item.provideId())
+            }
         }
     }
 

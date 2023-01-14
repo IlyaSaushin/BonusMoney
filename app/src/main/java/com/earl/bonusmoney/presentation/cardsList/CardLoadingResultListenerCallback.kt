@@ -1,4 +1,4 @@
-package com.earl.bonusmoney.presentation
+package com.earl.bonusmoney.presentation.cardsList
 
 interface CardLoadingResultListenerCallback {
     fun notifyUserAboutError(errorMessage: String)

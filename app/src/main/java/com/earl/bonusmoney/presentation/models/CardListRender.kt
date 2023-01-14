@@ -1,7 +1,6 @@
 package com.earl.bonusmoney.presentation.models
 
-import android.util.Log
-import com.earl.bonusmoney.presentation.CardLoadingResultListenerCallback
+import com.earl.bonusmoney.presentation.cardsList.CardLoadingResultListenerCallback
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
@@ -26,10 +25,7 @@ interface CardListRender {
         }
 
         override fun updateCardList(list: List<CompanyPresentation>) {
-            if (list.isEmpty()) {
-                Log.d("tag", "initRecyclerAdapter: empty list")
-                cardLoadingResultCallback?.gotEmptyList()
-            }
+            if (list.isEmpty()) cardLoadingResultCallback?.gotEmptyList()
             cards.value += list.map { it.provideDetailsForCardRecycler() }
         }
 
@@ -38,9 +34,9 @@ interface CardListRender {
         override fun provideException(e: Exception) {
             val errorMessage = when(e.message) {
                 badRequestException -> badRequestException
-                unauthorizedRequestException -> "ошибка авторизации"
-                internalServerException -> "все упало"
-                else -> "unknown error :_("
+                unauthorizedRequestException -> authError
+                internalServerException -> internalError
+                else -> unknownError
             }
             cardLoadingResultCallback?.notifyUserAboutError(errorMessage)
             cardLoadingResultCallback?.gotEmptyList()
@@ -51,5 +47,8 @@ interface CardListRender {
         private const val badRequestException = "HTTP 400 Bad Request"
         private const val unauthorizedRequestException = "HTTP 401 Unauthorized"
         private const val internalServerException = "HTTP 500 Server Error"
+        private const val authError = "ошибка авторизации"
+        private const val internalError = "все упало"
+        private const val unknownError = "unknown error :_("
     }
 }

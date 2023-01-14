@@ -1,6 +1,5 @@
 package com.earl.bonusmoney.data
 
-import android.util.Log
 import com.earl.bonusmoney.data.mappers.CompanyDataToDomainMapper
 import com.earl.bonusmoney.data.mappers.CompanyRemoteToDataMapper
 import com.earl.bonusmoney.data.models.CompanyData
@@ -9,7 +8,6 @@ import com.earl.bonusmoney.data.retrofit.Service
 import com.earl.bonusmoney.domain.Repository
 import com.earl.bonusmoney.domain.models.CardListDomain
 import com.earl.bonusmoney.domain.models.CompanyDomain
-import retrofit2.HttpException
 
 class BaseRepository(
     private val service: Service,
@@ -17,56 +15,43 @@ class BaseRepository(
     private val companyDataToDomainMapper: CompanyDataToDomainMapper<CompanyDomain>
 ) : Repository {
 
-    override suspend fun getAllCards(offset: Int) = try {
-        val requestApiKey = mapOf(Pair("TOKEN", "123"))
+    override suspend fun getAllCards(offset: Int, apikey: Map<String, String>) = try {
         val resultList = service.getAllCards(
-            requestApiKey,
+            apikey,
             BodyDto(offset)
         )
-        Log.d("tag", "getAllCards repository: $resultList")
         CardListDomain.Success(resultList.map { it.mapToData(companyRemoteToDataMapper) }.map { it.map(companyDataToDomainMapper) })
     } catch (e: Exception) {
-        Log.d("tag", "getAllCards: repository $e")
         CardListDomain.Fail(e)
     }
 
-    override suspend fun getAllCardsIdeal(offset: Int) = try {
-        val requestApiKey = mapOf(Pair("TOKEN", "123"))
+    override suspend fun getAllCardsIdeal(offset: Int, apikey: Map<String, String>) = try {
         val resultList = service.getAllCardsIdeal(
-            requestApiKey,
+            apikey,
             BodyDto(offset)
         )
-        Log.d("tag", "getAllCards repository: $resultList")
         CardListDomain.Success(resultList.map { it.mapToData(companyRemoteToDataMapper) }.map { it.map(companyDataToDomainMapper) })
     } catch (e: Exception) {
-        Log.d("tag", "getAllCards: repository $e")
         CardListDomain.Fail(e)
     }
 
-    override suspend fun getAllCardsLong(offset: Int) = try {
-        val requestApiKey = mapOf(Pair("TOKEN", "123"))
+    override suspend fun getAllCardsLong(offset: Int, apikey: Map<String, String>) = try {
         val resultList = service.getAllCardsLong(
-            requestApiKey,
+            apikey,
             BodyDto(offset)
         )
-        Log.d("tag", "getAllCards repository: $resultList")
         CardListDomain.Success(resultList.map { it.mapToData(companyRemoteToDataMapper) }.map { it.map(companyDataToDomainMapper) })
     } catch (e: Exception) {
-        Log.d("tag", "getAllCards: repository $e")
         CardListDomain.Fail(e)
     }
 
-    override suspend fun getAllCardsError(offset: Int) = try {
-        val requestApiKey = mapOf(Pair("TOKEN", "123"))
+    override suspend fun getAllCardsError(offset: Int, apikey: Map<String, String>) = try {
         val resultList = service.getAllCardsError(
-            requestApiKey,
+            apikey,
             BodyDto(offset)
         )
-        Log.d("tag", "getAllCards repository: $resultList")
         CardListDomain.Success(resultList.map { it.mapToData(companyRemoteToDataMapper) }.map { it.map(companyDataToDomainMapper) })
     } catch (e: Exception) {
-
-        Log.d("tag", "getAllCards: repository ${e.message}")
         CardListDomain.Fail(e)
     }
 }
