@@ -1,4 +1,4 @@
-package com.earl.bonusmoney.presentation
+package com.earl.bonusmoney.presentation.cardsList
 
 import android.content.Context
 import android.content.res.Resources
@@ -9,18 +9,12 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.earl.bonusmoney.R
 
-
 private const val RADIUS = 40
 private const val MARGIN_BOTTOM = 30f
 
 internal object PaginationProgressDrawer {
 
     private val oval = RectF()
-//    val Int.dp: Int
-//        get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-//
-//    val Float.dp: Int
-//        get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
     private var sweepStep = 4
     private var startAngle = 0f
     private var sweepAngle = 10f
@@ -56,6 +50,7 @@ internal object PaginationProgressDrawer {
         val coorX = (view.right / 2).toFloat()
         val coorY = view.bottom.toFloat() + MARGIN_BOTTOM
         val ovalDiameter = RADIUS * 2
+        val context = view.context
 
         setPaintColor(view.context)
         oval.set(coorX, coorY, coorX + ovalDiameter, coorY + ovalDiameter)
@@ -69,7 +64,7 @@ internal object PaginationProgressDrawer {
         textPain.textSize = 42f
         setPaintColor(view.context)
         textPain.textAlign = Paint.Align.CENTER
-        canvas.drawText("Пoдгрузка компаний", x, y, textPain)
+        canvas.drawText(context.getString(R.string.loading_companies), x, y, textPain)
         recyclerView.invalidate()
     }
 

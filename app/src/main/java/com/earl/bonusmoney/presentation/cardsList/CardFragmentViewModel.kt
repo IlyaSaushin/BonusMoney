@@ -1,4 +1,4 @@
-package com.earl.bonusmoney.presentation
+package com.earl.bonusmoney.presentation.cardsList
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -24,40 +24,36 @@ class CardFragmentViewModel @Inject constructor(
         cardListRender.setErrorListenerCallback(callback)
     }
 
-    fun getAllCards(offset: Int) {
+    fun getAllCards(offset: Int, apikey: Map<String, String>) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list = interactor.getAllCards(offset).mapToPresentation(cardListDomainToPresentationMapper)
-            Log.d("tag", "getAllCards: viewmodel -> $list")
+            val list = interactor.getAllCards(offset, apikey).mapToPresentation(cardListDomainToPresentationMapper)
             withContext(Dispatchers.Main) {
                 list.map(cardListRender)
             }
         }
     }
 
-    fun getAllCardsIdeal(offset: Int) {
+    fun getAllCardsIdeal(offset: Int, apikey: Map<String, String>) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list = interactor.getAllCardsIdeal(offset).mapToPresentation(cardListDomainToPresentationMapper)
-            Log.d("tag", "getAllCards: viewmodel -> $list")
+            val list = interactor.getAllCardsIdeal(offset, apikey).mapToPresentation(cardListDomainToPresentationMapper)
             withContext(Dispatchers.Main) {
                 list.map(cardListRender)
             }
         }
     }
 
-    fun getAllCardsLong(offset: Int) {
+    fun getAllCardsLong(offset: Int, apikey: Map<String, String>) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list = interactor.getAllCardsLong(offset).mapToPresentation(cardListDomainToPresentationMapper)
-            Log.d("tag", "getAllCards: viewmodel -> $list")
+            val list = interactor.getAllCardsLong(offset, apikey).mapToPresentation(cardListDomainToPresentationMapper)
             withContext(Dispatchers.Main) {
                 list.map(cardListRender)
             }
         }
     }
 
-    fun getAllCardsError(offset: Int) {
+    fun getAllCardsError(offset: Int, apikey: Map<String, String>) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list = interactor.getAllCardsError(offset).mapToPresentation(cardListDomainToPresentationMapper)
-            Log.d("tag", "getAllCards: viewmodel -> $list")
+            val list = interactor.getAllCardsError(offset, apikey).mapToPresentation(cardListDomainToPresentationMapper)
             withContext(Dispatchers.Main) {
                 list.map(cardListRender)
             }

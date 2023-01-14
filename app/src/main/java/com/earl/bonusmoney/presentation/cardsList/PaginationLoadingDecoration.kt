@@ -1,4 +1,4 @@
-package com.earl.bonusmoney.presentation
+package com.earl.bonusmoney.presentation.cardsList
 
 import android.graphics.Canvas
 import android.graphics.Rect

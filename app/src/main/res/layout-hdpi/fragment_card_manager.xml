@@ -57,6 +57,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/card_recycler_item"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginBottom="@dimen/margin1"
         />
     
 </androidx.constraintlayout.widget.ConstraintLayout>
