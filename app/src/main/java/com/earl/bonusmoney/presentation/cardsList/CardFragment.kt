@@ -84,7 +84,7 @@ class CardFragment : BaseFragment<FragmentCardManagerBinding>(), CardLoadingResu
         val key = preferenceManager.getString(Keys.KEY_API) ?: ""
         val value = preferenceManager.getString(Keys.KEY_API_VALUE) ?: ""
         val apikey = mapOf(Pair(key, value))
-        viewModel.getAllCards(offset, apikey)
+        viewModel.getAllCardsLong(offset, apikey)
     }
 
     private fun initProgressBar() {
